@@ -1,0 +1,361 @@
+[
+    {
+        "id": "7f5377fd72d362a0",
+        "type": "tab",
+        "label": "Flow 6",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3068cc92ed3ab157",
+        "type": "telegram receiver",
+        "z": "7f5377fd72d362a0",
+        "name": "",
+        "bot": "b9c61f149b39fb3f",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "6c82744da7f429a0"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "400c643927f94ac5",
+        "type": "change",
+        "z": "7f5377fd72d362a0",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "telegram",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "telegram.content",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "history",
+                "pt": "flow",
+                "to": "history",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 160,
+        "wires": [
+            [
+                "cbb97e63c01bfc84"
+            ]
+        ]
+    },
+    {
+        "id": "cbb97e63c01bfc84",
+        "type": "chatgpt",
+        "z": "7f5377fd72d362a0",
+        "name": "",
+        "API_KEY": "sk-lEisfI4h10C8qMTvZNF1T3Blbk",
+        "Organization": "org-gZVmHipfH5",
+        "topic": "gpt4",
+        "BaseUrl": "https://api.openai.com",
+        "x": 400,
+        "y": 60,
+        "wires": [
+            [
+                "5e0bd72b15143d0e",
+                "83b038bd1f6f29d6"
+            ]
+        ]
+    },
+    {
+        "id": "5e0bd72b15143d0e",
+        "type": "change",
+        "z": "7f5377fd72d362a0",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "telegram.content",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "telegram",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "history",
+                "pt": "msg",
+                "to": "history",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 280,
+        "wires": [
+            [
+                "b806c9ac467c6c48",
+                "83b038bd1f6f29d6"
+            ]
+        ]
+    },
+    {
+        "id": "b806c9ac467c6c48",
+        "type": "telegram sender",
+        "z": "7f5377fd72d362a0",
+        "name": "",
+        "bot": "b9c61f149b39fb3f",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 570,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6c82744da7f429a0",
+        "type": "switch",
+        "z": "7f5377fd72d362a0",
+        "name": "",
+        "property": "payload.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "message",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "voice",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "400c643927f94ac5"
+            ],
+            [
+                "7e5afb1739eb66d7"
+            ]
+        ]
+    },
+    {
+        "id": "7e5afb1739eb66d7",
+        "type": "change",
+        "z": "7f5377fd72d362a0",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "telegram",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "telegram.weblink",
+                "pt": "msg",
+                "to": "url",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "history",
+                "pt": "flow",
+                "to": "history",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 220,
+        "wires": [
+            [
+                "ba57263c82e4abd0"
+            ]
+        ]
+    },
+    {
+        "id": "ba57263c82e4abd0",
+        "type": "http request",
+        "z": "7f5377fd72d362a0",
+        "name": "",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "172aca8c8afb56ce"
+            ]
+        ]
+    },
+    {
+        "id": "83b038bd1f6f29d6",
+        "type": "debug",
+        "z": "7f5377fd72d362a0",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "172aca8c8afb56ce",
+        "type": "watson-speech-to-text",
+        "z": "7f5377fd72d362a0",
+        "name": "",
+        "alternatives": 1,
+        "speakerlabels": true,
+        "smartformatting": false,
+        "lang": "pt-BR",
+        "langhidden": "pt-BR",
+        "langcustom": "NoCustomisationSetting",
+        "langcustomhidden": "",
+        "custom-weight": "0.5",
+        "band": "NarrowbandModel",
+        "bandhidden": "NarrowbandModel",
+        "keywords": "",
+        "keywords-threshold": "0.5",
+        "word-confidence": false,
+        "password": "",
+        "apikey": "QjCRCrtus9aclW",
+        "payload-response": true,
+        "streaming-mode": false,
+        "streaming-mute": true,
+        "auto-connect": false,
+        "discard-listening": false,
+        "disable-precheck": false,
+        "service-endpoint": "https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/3500ad36-0",
+        "x": 300,
+        "y": 360,
+        "wires": [
+            [
+                "ad9aaeee090813a0",
+                "83b038bd1f6f29d6"
+            ]
+        ]
+    },
+    {
+        "id": "ad9aaeee090813a0",
+        "type": "chatgpt",
+        "z": "7f5377fd72d362a0",
+        "name": "",
+        "API_KEY": "sk-lEisfI4h10C8qMTv",
+        "Organization": "org-gZVmHip",
+        "topic": "gpt4",
+        "BaseUrl": "https://api.openai.com",
+        "x": 280,
+        "y": 420,
+        "wires": [
+            [
+                "83b038bd1f6f29d6",
+                "57bb9c767d73a7d7"
+            ]
+        ]
+    },
+    {
+        "id": "57bb9c767d73a7d7",
+        "type": "watson-text-to-speech",
+        "z": "7f5377fd72d362a0",
+        "name": "",
+        "lang": "pt-BR",
+        "langhidden": "pt-BR",
+        "langcustom": "NoCustomisationSetting",
+        "langcustomhidden": "",
+        "voice": "pt-BR_IsabelaV3Voice",
+        "voicehidden": "",
+        "format": "audio/ogg; codecs=opus",
+        "password": "",
+        "apikey": "WlTcGnE7rWWRzBejvGwZIp4n",
+        "payload-response": true,
+        "service-endpoint": "https://api.us-south.text-to-speech.watson.cloud.ibm.com/instances/3bbe4c15-88b0-",
+        "x": 300,
+        "y": 480,
+        "wires": [
+            [
+                "83b038bd1f6f29d6",
+                "5e0bd72b15143d0e"
+            ]
+        ]
+    },
+    {
+        "id": "b9c61f149b39fb3f",
+        "type": "telegram bot",
+        "botname": "Scooby Doo",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    }
+]
